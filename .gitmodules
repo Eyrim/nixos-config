@@ -1,3 +1,6 @@
 [submodule "dotfiles"]
 	path = dotfiles
 	url = https://github.com/Eyrim/dotfiles
+[submodule "hosts/default/dotfiles"]
+	path = hosts/default/dotfiles
+	url = git@github.com:Eyrim/dotfiles.git
