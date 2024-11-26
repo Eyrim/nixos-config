@@ -61,8 +61,6 @@
 
   services.xserver.xkbOptions = "caps:swapescape";
 
- # services.xserver.xkbOptions = "ctrl:swapcaps";
-
   # Configure console keymap
   console.keyMap = "uk";
 
@@ -126,6 +124,7 @@
 	libgcc
 	nodejs_22
 	yarn
+    discord
 	xz # xz-utils
 	libGLU
 	cmake
@@ -138,6 +137,7 @@
 	lua-language-server
 	kotlin-language-server
 	nil # nix ls
+    nodePackages.bash-language-server
 
 	# Formatters
 	stylua
@@ -152,6 +152,9 @@
       "eyrim" = import ./home.nix;
     };
   };
+
+  programs.zsh.enable = true;
+  users.users.eyrim.shell = pkgs.zsh;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
-{
+let
+	dotfilesDirectory = "${config.home.homeDirectory}/dotfiles";
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "eyrim";
@@ -18,10 +20,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -36,13 +34,26 @@
     # '')
   ];
 
+  xdg.configFile = {
+  	"nvim/" = {
+		source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDirectory}/nvim";
+		recursive = true;
+	};
+  };
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
+    "scripts/" = {
+        source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDirectory}/sh/scripts/";
+    };
+    ".zshrc" = {
+        source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDirectory}/sh/.zshrc";
+    };
+    
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
@@ -68,7 +79,20 @@
   #  /etc/profiles/per-user/eyrim/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    syntaxHighlighting.enable = true;
+  };
+
+  # Should eventually be configured with nixvim or some other nix-y way, for now using home.file
+  programs.neovim = {
+	enable = true;
+  	viAlias = true;
+  	vimAlias = true;
   };
 
   # Let Home Manager install and manage itself.
