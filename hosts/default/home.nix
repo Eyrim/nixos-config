@@ -53,6 +53,10 @@ in {
     ".zshrc" = {
         source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDirectory}/sh/.zshrc";
     };
+
+    ".gitConfig" = {
+        source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDirectory}/git/.gitConfig";
+    };
     
 
     # # You can also set the file content immediately.
@@ -86,6 +90,10 @@ in {
     enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
+  };
+
+  programs.git = {
+    enable = true;
   };
 
   # Should eventually be configured with nixvim or some other nix-y way, for now using home.file
