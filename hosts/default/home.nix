@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-	dotfilesDirectory = "${config.home.homeDirectory}/dotfiles";
+	dotfilesDirectory = "${config.home.homeDirectory}/.config/nixos/hosts/default/dotfiles";
 in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -36,7 +36,7 @@ in {
 
   xdg.configFile = {
   	"nvim/" = {
-		source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDirectory}/nvim";
+		source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDirectory}/nvim/";
 		recursive = true;
 	};
   };
