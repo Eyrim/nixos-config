@@ -138,6 +138,7 @@
 	kotlin-language-server
 	nil # nix ls
     nodePackages.bash-language-server
+    dockerfile-language-server-nodejs
 
 	# Formatters
 	stylua
