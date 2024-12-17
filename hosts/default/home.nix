@@ -96,10 +96,9 @@ in {
     enable = true;
   };
 
-  # Should eventually be configured with nixvim or some other nix-y way, for now using home.file
   programs.neovim = {
 	enable = true;
-  	viAlias = true;
+  	viAlias = false;
   	vimAlias = true;
   };
 
