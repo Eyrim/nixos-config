@@ -95,7 +95,7 @@
 	libgcc
 	nodejs_22
 	yarn
-    discord
+    vesktop
 	xz # xz-utils
 	libGLU
 	cmake
@@ -103,6 +103,7 @@
 	pkg-config
 	gtk3
 	libstdcxx5
+    docker
 
 	# Language Servers
 	lua-language-server
@@ -110,6 +111,7 @@
 	nil # nix ls
     nodePackages.bash-language-server
     dockerfile-language-server-nodejs
+    typescript
 
 	# Formatters
 	stylua
