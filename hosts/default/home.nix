@@ -39,6 +39,17 @@ in {
 		source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDirectory}/nvim/";
 		recursive = true;
 	};
+
+    "tmux/" = {
+		source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDirectory}/tmux/";
+		recursive = true;
+     };
+
+
+    "wezterm/" = {
+		source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDirectory}/wezterm/";
+		recursive = true;
+     };
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -57,13 +68,6 @@ in {
     ".gitConfig" = {
         source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDirectory}/git/.gitConfig";
     };
-    
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
   };
 
   # Home Manager can also manage your environment variables through
