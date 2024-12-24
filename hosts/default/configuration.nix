@@ -11,11 +11,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos";
-
-  networking.networkmanager.enable = true;
-  hardware.bluetooth.enable = true;
-
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
   i18n.extraLocaleSettings = {
@@ -30,38 +25,100 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  # Enable the X11 windowing system
-  services.xserver.enable = true;
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.xkb = {
-    layout = "gb";
-    variant = "";
+    hardware = {
+        bluetooth = {
+            enable = true;
+        };
+
+        pulseaudio = {
+            enable = false;
+        };
+    };
+
+    networking = {
+        networkmanager = {
+            enable = true;
+        };
+
+        hostName = "nixos";
+    };
+
+
+services = {
+    pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+        # use the example session manager (no others are packaged yet so this is enabled by default,
+        # no need to redefine it in your config for now)
+        #media-session.enable = true;
+    };
+
+    xserver = {
+        enable = true;
+        
+        dpi = 220;
+
+        libinput = {
+            enable = true;
+
+            touchpad = {
+                naturalScrolling = true;
+               accelProfile = "flat";
+            };
+
+            mouse = {
+                naturalScrolling = false;
+               accelProfile = "flat";
+            };
+        };
+
+        xkb = {
+            layout = "gb";
+            variant = "";
+        };
+        xkbOptions = "caps:swapescape";
+
+        displayManager = {
+            gdm = {
+                enable = false;
+            };
+
+            sddm = {
+                enable = true;
+            };
+
+            autoLogin = {
+                enable = true;
+
+                user = "eyrim";
+            };
+        };
+
+        desktopManager = {
+            gnome = {
+                enable = true;
+            };
+        };
+
+        windowManager = {
+            awesome = {
+                enable = true;
+            };
+        };
+    };
+
+      # Enable CUPS to print documents.
+    printing = {
+        enable = true;
+    };
   };
-  services.xserver.xkbOptions = "caps:swapescape";
 
   # Configure console keymap
   console.keyMap = "uk";
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.eyrim = {
@@ -72,9 +129,6 @@
     ];
   };
 
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "eyrim";
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
@@ -117,6 +171,7 @@
 	stylua
 
 	wezterm
+    awesome
 	flutter319
   ];
 
