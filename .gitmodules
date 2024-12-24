@@ -1,6 +1,8 @@
 [submodule "dotfiles"]
 	path = dotfiles
-	url = https://github.com/Eyrim/dotfiles
+        url = https://github.com/Eyrim/dotfiles
+        branch = main
 [submodule "hosts/default/dotfiles"]
 	path = hosts/default/dotfiles
-	url = git@github.com:Eyrim/dotfiles.git
+        url = git@github.com:Eyrim/dotfiles.git
+        branch = main
