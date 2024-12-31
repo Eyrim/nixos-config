@@ -143,36 +143,43 @@ services = {
   	neovim
 	git
 	tmux
-	cargo
 	unzip
+        vesktop
+        fzf
+        docker
+	wezterm
+        awesome
+
+        # Build Tools
+	libGLU
+	cmake
+	ninja
+
+	pkg-config
+
+        # Lib
+	xz # xz-utils
+	gtk3
+	libstdcxx5
+
+        # Languages etc.
+	cargo
+	flutter319
 	gcc
 	libgcc
 	nodejs_22
 	yarn
-    vesktop
-	xz # xz-utils
-	libGLU
-	cmake
-	ninja
-	pkg-config
-	gtk3
-	libstdcxx5
-    docker
 
 	# Language Servers
 	lua-language-server
 	kotlin-language-server
 	nil # nix ls
-    nodePackages.bash-language-server
-    dockerfile-language-server-nodejs
-    typescript
+        nodePackages.bash-language-server
+        dockerfile-language-server-nodejs
+        typescript
 
 	# Formatters
 	stylua
-
-	wezterm
-    awesome
-	flutter319
   ];
 
   programs.firefox.enable = true;
